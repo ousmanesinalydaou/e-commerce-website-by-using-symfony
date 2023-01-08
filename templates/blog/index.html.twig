@@ -1,20 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-sm-6" style=" ">
+            <div class="card border-primary mb-3" style="max-width: 26rem;">
+                <div class="card-header">{{ article.title }}</div>
+                <div class="card-body">
+                    <div class="metadata">Ecrit le {{ article.createAt | date('d/m/Y') }} a {{ article.createAt | date('H:i') }}</div>
+                    <div class="content">
+                        <img src="{{article.image}}" alt="" style=" width: -moz-available;">
+                        <p>{{ article.content }}</p>
+                        <a href="{{ path('blog_show', {id: article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/learning/symfony/myDemo/practice1/src/Controller/BlogController.php'|file_link(0) }}">src/Controller/BlogController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/learning/symfony/myDemo/practice1/templates/blog/index.html.twig'|file_link(0) }}">templates/blog/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!--  <article>
+            <h2>Titre de l'article</h2>
+            <div class="metadata">Ecrit le 10/05/2023 a 10H00 dans la categorie Politique</div>
+            <div class="content">
+                <img src="https://via.placeholder.com/350x150" alt="">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo, ea quasi molestiae non adipisci optio!</p>
+                <p>Quidem voluptatum quos adipisci voluptatibus, illo nulla quia natus provident, beatae veniam excepturi? Neque, debitis!</p>
+                <a href="" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article>
+        <article>
+            <h2>Titre de l'article</h2>
+            <div class="metadata">Ecrit le 10/05/2023 a 10H00 dans la categorie Politique</div>
+            <div class="content">
+                <img src="https://via.placeholder.com/350x150" alt="">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo molestiae quasi repellendus voluptas, nostrum numquam?</p>
+                <p>Tempora consequuntur inventore adipisci. Ab labore adipisci quia incidunt autem delectus eveniet, sed fugiat hic.</p>
+                <a href="" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article>
+        <article>
+            <h2>Titre de l'article</h2>
+            <div class="metadata">Ecrit le 10/05/2023 a 10H00 dans la categorie Politique</div>
+            <div class="content">
+                <img src="https://via.placeholder.com/350x150" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis maiores, doloremque dignissimos repellat earum sint!</p>
+                <p>Vel assumenda ducimus at facilis nostrum perspiciatis cum repellendus natus iste! Quasi expedita suscipit illo?</p>
+                <a href="" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article> -->
+
 {% endblock %}

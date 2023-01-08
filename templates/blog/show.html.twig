@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body%}
+        <div class="col-sm-6" style="width: fit-content; ">
+            <div class="card border-primary mb-3" style="max-width: 26rem;">
+                <div class="card-header">{{ article.title }}</div>
+                <div class="card-body">
+                    <div class="metadata">Ecrit le {{ article.createAt | date('d/m/Y') }} a {{ article.createAt | date('H:i') }}
+                    </div>
+                    <div class="content">
+                        <img src="{{article.image}}" alt="" style=" width: -moz-available;">
+                        <p>{{ article.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
