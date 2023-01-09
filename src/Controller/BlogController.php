@@ -43,21 +43,26 @@ class BlogController extends AbstractController
     }
     
     #[Route('/article/new', name: 'add_article')]
-    public function addArticle(Article $repo, ObjectManager $manager): Response
+    public function addArticle(ManagerRegistry $doctrine): Response
     {
-        for ($i = 1; $i <= 5; $i++) 
+        $manager = $doctrine->getManager();
+        //
+
+        for ($i = 1; $i <= 5; $i++)
         {
-            $k = $i + 20;
+            $repo = new Article();
+            //
+            $k = $i + 18;
             $repo->setTitle("Article $k")
                  ->setContent("Contenue de l'article $k ")
                  ->setImage("https://via.placeholder.com/350x150")
                  ->setCreateAt(new \DateTime());
 
             $manager->persist($repo);
+            //
+            $manager->flush();
         }
         //
-        $manager->flush();
-        //
-        return $this->render('blog/index.html.twig');
+        return $this->redirect('/blog');
     }
 }
