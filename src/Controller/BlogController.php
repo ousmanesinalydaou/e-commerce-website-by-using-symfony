@@ -43,7 +43,7 @@ class BlogController extends AbstractController
     }
     
     #[Route('/article/new', name: 'add_article')]
-    public function addArticle(ManagerRegistry $doctrine): Response
+    public function addArticle(ManagerRegistry $doctrine, Request $request): Response
     {
         $manager = $doctrine->getManager();
         //
