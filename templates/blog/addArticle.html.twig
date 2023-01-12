@@ -1,5 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body%}
+    <form method="POST" action="#">
+  <fieldset>
+    <legend>Add an article</legend>
+    <div class="form-group row">
+    </div>
+    <div class="form-group">
+      <label for="title" class="form-label mt-4">Article Title</label>
+            
+      <input type="text" class="form-control" id="title" name="title" aria-describedby="articleTitle" placeholder="Enter the title of the article">
+      <small id="articleTitle" class="form-text text-muted">Be sure to enter the right name</small>
+    </div>
 
+    <div class="form-group">
+      <label for="exampleTextarea" class="form-label mt-4">Enter the content of the descriptions</label>
+      <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="image" class="form-label mt-4">Image link</label>
+        <input type="text" class="form-control" id="image" name="image" aria-describedby="articleImage"
+        value="https://via.placeholder.com/350x150">
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </fieldset>
+</form>
 {% endblock%}

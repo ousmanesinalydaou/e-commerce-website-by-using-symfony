@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Symfony\Bridge\Doctrine\ManagerRegistry as DoctrineManagerRegistry;
 
 class BlogController extends AbstractController
 {
@@ -26,7 +28,7 @@ class BlogController extends AbstractController
     }
 
     #[Route('/', name: 'home')]
-    public function home(): Response
+    public function home(Request $request): Response
     {
         return $this->render('blog/home.html.twig', [
             'title'=>'HOME PAGE',
@@ -47,6 +49,7 @@ class BlogController extends AbstractController
     {
         $manager = $doctrine->getManager();
         //
+        //
 
         for ($i = 1; $i <= 5; $i++)
         {
@@ -64,5 +67,27 @@ class BlogController extends AbstractController
         }
         //
         return $this->redirect('/blog');
+    }
+
+    #[Route("/addArticle", name: "add_article")]
+    public function addArticleForm(Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        $request::createFromGlobals();
+        $manager = $doctrine->getManager();
+
+        dump($request);
+        if($request->request->count() > 0)
+        {
+            $article = new Article;
+            $article->setTitle($request->request->get('title'))
+                    ->setContent($request->request->get('content'))
+                    ->setImage($request->request->get('image'))
+                    ->setCreateAt(new \DateTime());
+            $manager->persist($article);
+            $manager->flush();
+            return $this->redirectToRoute('app_blog');
+        }
+        return $this->render('/blog/addArticle.html.twig');
     }
 }
