@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 
 use App\Entity\Article;
@@ -72,6 +73,7 @@ class BlogController extends AbstractController
     #[Route("/addArticle", name: "add_article")]
     public function addArticleForm(Request $request, ManagerRegistry $doctrine): Response
     {
+        //$route->alias('add_article', 'addArticle');        
 
         $request::createFromGlobals();
         $manager = $doctrine->getManager();

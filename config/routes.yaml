@@ -1,3 +1,6 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+deleteArticle:
+    path: blog/article/delete/
+    controller: App\Controller\DoctrineLearningController::index    
